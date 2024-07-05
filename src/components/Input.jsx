@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
+import { forwardRef } from "react";
 
-export default function Input({ label, textArea, ...props }) {
+const Input = forwardRef(function Input({ label, textArea, ...props }, ref) {
   const classes =
     "w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600";
   return (
@@ -9,15 +10,16 @@ export default function Input({ label, textArea, ...props }) {
         {label}
       </label>
       {textArea ? (
-        <textarea className={classes} {...props} />
+        <textarea ref={ref} className={classes} {...props} />
       ) : (
-        <input className={classes} {...props} />
+        <input ref={ref} className={classes} {...props} />
       )}
     </p>
   );
-}
+});
 
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   textArea: PropTypes.bool,
 };
+export default Input;
